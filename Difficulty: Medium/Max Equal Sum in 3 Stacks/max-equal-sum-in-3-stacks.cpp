@@ -1,0 +1,34 @@
+class Solution {
+  public:
+    int maxEqualSum(vector<int> &s1, vector<int> &s2, vector<int> &s3) {
+        int sum1 = 0, sum2 = 0, sum3 = 0;
+
+        // Calculate the initial sum of each stack
+        for (int x : s1) sum1 += x;
+        for (int x : s2) sum2 += x;
+        for (int x : s3) sum3 += x;
+
+        // Pointers representing the top of each stack
+        int i = 0, j = 0, k = 0;
+        int n1 = s1.size(), n2 = s2.size(), n3 = s3.size();
+
+        while (i < n1 && j < n2 && k < n3) {
+            // If all three sums are equal, we found the maximum possible equal sum
+            if (sum1 == sum2 && sum2 == sum3) {
+                return sum1;
+            }
+
+            // Pop the top element from the stack with the largest sum
+            if (sum1 >= sum2 && sum1 >= sum3) {
+                sum1 -= s1[i++];
+            } else if (sum2 >= sum1 && sum2 >= sum3) {
+                sum2 -= s2[j++];
+            } else if (sum3 >= sum1 && sum3 >= sum2) {
+                sum3 -= s3[k++];
+            }
+        }
+
+        // Check if all stacks became empty (sum = 0)
+        return (sum1 == sum2 && sum2 == sum3) ? sum1 : 0;
+    }
+};
