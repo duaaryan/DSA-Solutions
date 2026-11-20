@@ -16,13 +16,16 @@ class Solution {
                     else if(sum>0){
                         k--;
                     }
+                        else {
+                            vector<int> temp={arr[i], arr[j], arr[k]};
+                            ans.push_back(temp);
+                            j++;
+                            k--;
+                            while(j<k && arr[j]==arr[j-1]) j++;
+                            while (j<k && arr[k]==arr[k+1]) k--;
+                            
                         
-                           else {
-    ans.push_back({arr[i], arr[j], arr[k]});
-    int tempj = arr[j], tempk = arr[k];
-    while(j < k && arr[j] == tempj) j++;
-    while(j < k && arr[k] == tempk) k--;
-
+                    
                 
             }
         }
